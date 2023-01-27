@@ -1,0 +1,94 @@
+int Blue=6;
+int Green=5;
+int Red=4;
+int Orange=3;
+#include <LiquidCrystal.h>
+LiquidCrystal lcd(12,11,10,9,8,7);
+
+void setup()
+{
+  pinMode(Blue, OUTPUT);
+  pinMode(Green, OUTPUT);
+  pinMode(Red, OUTPUT);
+  pinMode(Orange, OUTPUT);
+  Serial.begin(9600);
+  lcd.begin(16, 2);
+
+}
+
+void loop()
+{
+  
+ /*int warm =20;
+ int val= analogRead(0);
+ int temp= map(((val-20)*3.04),0,1023,-40,125);*/
+ int warm =20;
+ int temp = analogRead(0);
+ temp = temp * 0.48828125;
+ Serial.print("Temp: ");
+ Serial.print(temp);
+ Serial.println("c");
+
+  
+  delay(1000);
+  
+  if(temp<=warm-5)	{
+  digitalWrite(Blue, HIGH);
+  digitalWrite(Green, LOW);
+  digitalWrite(Red, LOW);
+  digitalWrite(Orange, LOW);
+  lcd.setCursor(0, 0);
+  lcd.print(temp);
+  lcd.setCursor(0, 1);
+  lcd.print("Cold");
+  }
+  delay(1000);
+  if(temp<=warm+5 && temp>15)
+  {
+  digitalWrite(Blue, LOW);
+  digitalWrite(Green, HIGH);
+  digitalWrite(Red, LOW);
+  digitalWrite(Orange, LOW);
+  lcd.setCursor(0, 0);
+  lcd.print(temp);
+  lcd.setCursor(0, 1);
+  lcd.print("Nice");
+  }
+  delay(1000);
+  if(temp<=warm+15 && temp>25)
+  {
+  digitalWrite(Blue, LOW);
+  digitalWrite(Green, LOW);
+  digitalWrite(Red, HIGH);
+  digitalWrite(Orange, LOW);
+  lcd.setCursor(0, 0);
+  lcd.print(temp);
+  lcd.setCursor(0, 1);
+  lcd.print("HOt");
+  }
+  delay(1000);
+  if(temp<=warm*2 && temp>35)
+  {
+  digitalWrite(Blue, LOW);
+  digitalWrite(Green, LOW);
+  digitalWrite(Red, LOW);
+  digitalWrite(Orange, HIGH);
+  lcd.setCursor(0, 0);
+  lcd.print(temp);
+  lcd.setCursor(0, 1);
+  lcd.print("so HOt");
+  }
+  delay(1000);
+  if(temp>warm*2)
+  {
+  digitalWrite(Blue, HIGH);
+  digitalWrite(Green, HIGH);
+  digitalWrite(Red,HIGH);
+  digitalWrite(Orange, HIGH);
+  lcd.setCursor(0, 0);
+  lcd.print(temp);
+  lcd.setCursor(0, 1);
+  lcd.print("Fire");
+  }
+  delay(1000);
+}
