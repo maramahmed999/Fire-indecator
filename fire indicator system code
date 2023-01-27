@@ -91,4 +91,4 @@ void loop()
   lcd.print("Fire");
   }
   delay(1000);
-}
+//if u want to have a look on the circuit visit this link: https://www.tinkercad.com/things/7SNHIRKxyhh-temp-sensor/editel?sharecode=5K7lHNemdu0czJB_2eHL8yb31-OFdR8J1GpnByWVK4E
